@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send("<h2>Hi Daniel Maina testing the docker file</h2>")
+    res.send(`<h2>Hi Daniel Maina testing the docker file, have used the bind-mount, please chek the file changes</h2>`)
 })
 
 app.listen(port, () => {
@@ -18,4 +18,13 @@ app.listen(port, () => {
 })
 
 
-// volumes ensures we have persistent data in our containers 
+// volumes ensures we have persistent data in our containers
+// bind-mount in containers - hlp to sync folder in local machine to folder in container
+// -v %cd%:/app 
+//  -v ${pwd}:/app   
+//  -v $(pwd):/app 
+
+// creating a volume override the folder in the container, solution creating an anonymous volume 
+
+// example
+// docker run -d -v ${pwd}:/app -v /app/node_modules -p 5000:5000 --name node-app node-app-image 
