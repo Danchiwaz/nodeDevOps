@@ -1,7 +1,7 @@
-FROM node 
+FROM node:alpine 
 WORKDIR /app
 COPY package.json . 
 RUN npm install 
-COPY . ./ 
-EXPOSE 3000 
-CMD ["nodemon", "index.js"]
+COPY . ./
+EXPOSE 5000 
+CMD ["npm", "start"]
