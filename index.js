@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send(`<h2>Hi Daniel Maina testing the docker file, have used the bind-mount, please chek the file changes</h2>`)
+    res.send(`<h2>checking if the infrastructure is valid</h2>`)
 })
 
 app.listen(port, () => {
