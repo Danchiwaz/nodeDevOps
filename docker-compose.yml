@@ -6,4 +6,28 @@ services:
       - "5000:5000"
     environment:
       - PORT=5000
-  
+
+  mongo:
+    image: mongo 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=Daniel
+      - MONGO_INITDB_ROOT_PASSWORD=myPassword
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
+
+
+# running the mongo db configs:
+
+# docker exec -it node-docker-mongo-1  mongosh -u "Daniel" -p "myPassword"
+# mongo commands 
+# access the shell  
+# mongosh 
+# db - see the current active db  
+# show dbs - see all databases 
+# use mydb - create new Database 
+
+
+# Named Volume can be used by multiple services 

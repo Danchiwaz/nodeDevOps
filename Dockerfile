@@ -1,11 +1,11 @@
 FROM node:alpine 
 WORKDIR /app
 COPY package*.json . 
-RUN npm ci 
+# RUN npm ci 
 ARG NODE_ENV
 RUN if [ "$NODE_ENV" = "development" ]; \
-        then npm install; \ 
-        else npm install --only=production; \
+        then npm ci; \ 
+        else npm --install=production; \
         fi
 COPY . ./
 ENV PORT 5000

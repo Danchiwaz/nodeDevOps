@@ -1,20 +1,28 @@
 const express  = require("express");
 const {config} = require("dotenv");
+const mongoose = require("mongoose")
 
 // initialize the .env 
 config();
 
+// connecting to mongoDb 
+mongoose.connect("mongodb://Daniel:myPassword@192.168.16.2:27017/?authSource=admin")
+.then(() => console.log("Succesfully connected to DB"))
+.catch((error) => console.error(error))
+
+// end of connecting the db 
+
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-    res.send(`<h2>this works shenanigans dfsdfbhgug</h2>`)
+    res.send(`<h2>this works from Daniel Maina</h2>`)
 })
 
-app.listen(port, () => {
-    console.log(`the server is running in port ${port}`)
+app.listen(PORT, () => {
+    console.log(`the server is running in port ${PORT}`)
 })
 
 
@@ -48,3 +56,6 @@ app.listen(port, () => {
 // remove unneccessary volumes 
 // docker volume prune 
 // docker rm container_name -fv  == delete the volume associated with that container 
+
+// docker inpsecting the IP Address 
+// docker inspect container_name 

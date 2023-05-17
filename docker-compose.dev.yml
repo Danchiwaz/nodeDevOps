@@ -10,4 +10,7 @@ services:
       - /app/node_modules 
     environment:
       - NODE_ENV=development
-    command: npm run dev
+    command: npm run dev 
+
+
+    # persist the data during the development 
