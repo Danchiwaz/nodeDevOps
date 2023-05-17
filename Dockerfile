@@ -4,8 +4,8 @@ COPY package*.json .
 # RUN npm ci 
 ARG NODE_ENV
 RUN if [ "$NODE_ENV" = "development" ]; \
-        then npm ci; \ 
-        else npm --install=production; \
+        then npm install; \ 
+        else npm ci; \
         fi
 COPY . ./
 ENV PORT 5000

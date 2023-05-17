@@ -10,7 +10,13 @@ services:
       - /app/node_modules 
     environment:
       - NODE_ENV=development
+      - MONGO_USER=Daniel
+      - MONGO_PASSWORD=myPassword
     command: npm run dev 
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=Daniel
+      - MONGO_INITDB_ROOT_PASSWORD=myPassword
 
 
     # persist the data during the development 
