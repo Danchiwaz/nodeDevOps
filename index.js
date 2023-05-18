@@ -13,6 +13,7 @@ config();
 
 // creating the routes
 const postRouter = require("./routes/postRoutes");
+const userRouter = require("./routes/authRoutes");
 
 // connecting to mongoDb
 
@@ -38,11 +39,10 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send(`<h2>this works from Daniel Main</h2>`);
-});
-
+// route configuration
 app.use("/api/v1/posts", postRouter);
+app.use("/api/v1/users", userRouter);
+// end of route configuration
 
 app.listen(PORT, () => {
   console.log(`the server is running in port ${PORT}`);

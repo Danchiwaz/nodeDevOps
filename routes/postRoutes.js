@@ -16,5 +16,4 @@ router
   .patch(postController.updateSinglePost)
   .delete(postController.deleteSinglePost);
 
-
-  module.exports = router;
+module.exports = router;
