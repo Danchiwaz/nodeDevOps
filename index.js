@@ -11,6 +11,9 @@ const {
 // initialize the .env
 config();
 
+// creating the routes
+const postRouter = require("./routes/postRoutes");
+
 // connecting to mongoDb
 
 // hack for db retries
@@ -31,12 +34,15 @@ connectWitRetries();
 // end of connecting the db
 
 const app = express();
+app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
   res.send(`<h2>this works from Daniel Main</h2>`);
 });
+
+app.use("/api/v1/posts", postRouter);
 
 app.listen(PORT, () => {
   console.log(`the server is running in port ${PORT}`);
