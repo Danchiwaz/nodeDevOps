@@ -1,12 +1,36 @@
 const express = require("express");
 const { config } = require("dotenv");
 const mongoose = require("mongoose");
+const redis = require('redis');
+const session = require('express-session');
+let  RedisStore = require('connect-redis')(session);
+
+
+
 const {
   MONGO_USER,
   MONGO_PASSWORD,
   MONGO_IP,
   MONGO_PORT,
+  REDIS_URL,
+  REDIS_PORT,
+  SESSION_SECRET,
 } = require("./config/config");
+
+const app = express();
+
+// creating a store
+
+// end of creating a store
+
+// create redis client
+let redisClient = redis.createClient({
+  host: REDIS_URL,
+  port: REDIS_PORT,
+  legacyMode:true
+});
+
+// redisClient.connect();
 
 // initialize the .env
 config();
@@ -34,12 +58,30 @@ const connectWitRetries = () => {
 connectWitRetries();
 // end of connecting the db
 
-const app = express();
+// session creation
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }),
+    secret: SESSION_SECRET,
+   
+    cookie: {
+      secure:false,
+      httpOnly: true,
+      maxAge: 3000000,
+      resave:false,
+      saveUninitialized: false,
+    },
+  })
+);
+// end of session creation
+
+
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-// route configuration
+// route configuratio
+
 app.use("/api/v1/posts", postRouter);
 app.use("/api/v1/users", userRouter);
 // end of route configuration
